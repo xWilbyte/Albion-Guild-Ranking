@@ -93,7 +93,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("Running Dawn Fame Stats")
+st.title("Running Dawn Fame Ranks")
 st.markdown("Explore the leaderboards for different statistics in the guild. Select a main category below, choose a subcategory, and use the search bar to find specific players.")
 
 @st.cache_data(ttl=3600)
