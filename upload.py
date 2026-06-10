@@ -176,10 +176,12 @@ with st.spinner("Fetching data from Albion servers..."):
     df = process_data(raw_data)
 
 if not df.empty:
-    # 7 Large Main Categories Tabs (Total moved to the far left)
+    # 7 Large Main Categories Tabs
     tabs = st.tabs(["Total", "PvP", "PvE", "Gathering", "Crafting", "Fishing", "Farming"])
     
-    zone_options = ["Total", "Mainland (Royal)", "Outlands", "Avalon", "Hellgate", "Corrupted Dungeon", "Mists"]
+    pve_zone_options = ["Total", "Mainland (Royal)", "Outlands", "Avalon", "Hellgate", "Corrupted Dungeon", "Mists"]
+    standard_zone_options = ["Total", "Mainland (Royal)", "Outlands", "Avalon"]
+    
     pvp_options = ["Kill Fame", "Death Fame", "Fame Ratio"]
     gathering_resources = ["All", "Fiber", "Hide", "Ore", "Rock", "Wood"]
 
@@ -234,7 +236,7 @@ if not df.empty:
         with col1:
             search_term = st.text_input("Search Player", key="pve_search")
         with col2:
-            selected_sub = st.selectbox("Select Zone", zone_options, key="pve_sub")
+            selected_sub = st.selectbox("Select Zone", pve_zone_options, key="pve_sub")
             
         actual_stat_name = f"PvE - {selected_sub}"
         stat_df = df[["Name", actual_stat_name]].sort_values(by=actual_stat_name, ascending=False).reset_index(drop=True)
@@ -254,7 +256,7 @@ if not df.empty:
         with col2:
             selected_res = st.selectbox("Select Resource", gathering_resources, index=0, key="gather_res")
         with col3:
-            selected_sub = st.selectbox("Select Zone", zone_options, key="gather_sub")
+            selected_sub = st.selectbox("Select Zone", standard_zone_options, key="gather_sub")
             
         actual_stat_name = f"Gathering - {selected_res} - {selected_sub}"
         stat_df = df[["Name", actual_stat_name]].sort_values(by=actual_stat_name, ascending=False).reset_index(drop=True)
@@ -272,7 +274,7 @@ if not df.empty:
         with col1:
             search_term = st.text_input("Search Player", key="craft_search")
         with col2:
-            selected_sub = st.selectbox("Select Zone", zone_options, key="craft_sub")
+            selected_sub = st.selectbox("Select Zone", standard_zone_options, key="craft_sub")
             
         actual_stat_name = f"Crafting - {selected_sub}"
         stat_df = df[["Name", actual_stat_name]].sort_values(by=actual_stat_name, ascending=False).reset_index(drop=True)
